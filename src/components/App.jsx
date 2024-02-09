@@ -19,16 +19,18 @@ const App = () => {
   });
 
   const fetchImages = async (inputValue, page) => {
-    console.log('Fetching images...', inputValue, page);
     setLoading(true);
 
     try {
-      const { images: fetchedImages, totalHits } =
-        await pixabayService.searchImages(inputValue, page);
+      const { images: fetchedImages } = await pixabayService.searchImages(
+        inputValue,
+        page
+      );
 
       setImages(prevImages =>
         page === 1 ? fetchedImages : [...prevImages, ...fetchedImages]
       );
+
       setPage(prevPage => prevPage + 1);
     } catch (error) {
       console.error('Error fetching images:', error);
@@ -72,7 +74,7 @@ const App = () => {
   useEffect(() => {
     if (inputValue.trim() === '') return;
 
-    fetchImages(inputValue, page);
+    fetchImages(inputValue, 1);
   }, [inputValue]);
 
   return (
