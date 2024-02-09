@@ -7,11 +7,12 @@ const Searchbar = ({ onSubmit }) => {
   const handleChange = event => {
     setInputValue(event.target.value);
   };
-  const handleSubmit = event => {
-    event.preventDefault();
-    onSubmit(inputValue.trim());
-  };
+
   useEffect(() => {
+    const handleSubmit = event => {
+      event.preventDefault();
+      onSubmit(inputValue.trim());
+    };
     document
       .getElementById('searchForm')
       .addEventListener('submit', handleSubmit);
